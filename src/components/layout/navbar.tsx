@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MenuItem {
   title: string;
@@ -114,6 +115,7 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
+            <ThemeToggle />
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
