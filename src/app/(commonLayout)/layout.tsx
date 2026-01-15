@@ -1,11 +1,9 @@
-import React from "react";
+import { Navbar } from "@/components/layout/navbar";
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <h1>
-        This is common layout
-      </h1>
+      <Navbar />
       {children}
     </div>
   );
