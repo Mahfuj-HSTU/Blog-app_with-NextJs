@@ -1,9 +1,9 @@
-const registerPage = () => {
-  return (
-    <div>
-      <h1>Register</h1>
-    </div>
-  );
-};
+import { RegisterForm } from "@/components/modules/authentication/register-form"
 
-export default registerPage;
+export default function Page() {
+  return (
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <RegisterForm />
+    </div>
+  )
+}

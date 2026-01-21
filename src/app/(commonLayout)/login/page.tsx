@@ -1,9 +1,11 @@
-const loginPage = () => {
-  return (
-    <div>
-      <h1>Login</h1>
-    </div>
-  );
-};
+import { LoginForm } from "@/components/modules/authentication/login-form"
 
-export default loginPage;
+export default function Page() {
+  return (
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="">
+        <LoginForm />
+      </div>
+    </div>
+  )
+}
