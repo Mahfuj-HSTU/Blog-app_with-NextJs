@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
+import Link from "next/link"
 import { toast } from "sonner"
 
 export function RegisterForm(props: React.ComponentProps<typeof Card>) {
@@ -161,7 +162,9 @@ export function RegisterForm(props: React.ComponentProps<typeof Card>) {
               Login with Google
             </Button>
           </div>
-
+          <p className="text-center text-sm">
+            Already have an account? <Link href="/login" className="text-blue-700 font-medium">Sign in</Link>
+          </p>
         </form>
       </CardContent>
     </Card>
