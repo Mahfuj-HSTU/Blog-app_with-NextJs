@@ -7,33 +7,35 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TBlog } from "@/types"
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 const BlogCard = ({ post }: { post: TBlog }) => {
-  const { title, content, thumbnail, tags, views } = post
+  const { title, content, thumbnail, tags } = post
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
-      <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+      <div className="absolute inset-0 z-10 aspect-video bg-black/35" />
       <Image
-        src={thumbnail as string}
+        src={thumbnail || ''}
         alt="Event cover"
-        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+        className="relative z-10 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
       />
-      <div className="absolute inset-2 -bottom-6 z-20 flex items-center text-sm">
-        {views}
-      </div>
+
       <CardHeader>
 
         <CardTitle>{title}</CardTitle>
         <CardDescription>
           {content}
+          <div className="mt-4">
+            {tags?.map((tag: string) => (
+              <Badge key={tag} variant="secondary">{tag}</Badge>
+            ))}
+          </div>
         </CardDescription>
       </CardHeader>
-      <CardFooter>
-        {tags?.map((tag: string) => (
-          <Badge key={tag} variant="secondary">{tag}</Badge>
-        ))}
-
+      <CardFooter className="border-t flex justify-end z-20">
+        <Link href={`/blogs/${post.id}`} className="flex gap-1 items-center text-sm font-semibold group-hover:underline">Read More<ArrowRight className="group-hover:ml-2 transition-all" size={14} /></Link>
       </CardFooter>
     </Card>
   )
