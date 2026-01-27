@@ -1,11 +1,11 @@
 import BlogCard from "@/components/modules/homepage/BlogCard";
 import { blogService } from "@/services/blog.service";
-import { userService } from "@/services/user.service";
+// import { userService } from "@/services/user.service";
 import { TBlog } from "@/types";
 
 export default async function Home() {
 
-  const session = await userService.getSession()
+  // const session = await userService.getSession()
   const blogs = await blogService.getBlogs({
     isFeatured: false,
     search: 'ai'

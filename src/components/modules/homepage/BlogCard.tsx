@@ -7,12 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TBlog } from "@/types"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Eye } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 const BlogCard = ({ post }: { post: TBlog }) => {
-  const { title, content, thumbnail, tags } = post
+  const { title, content, thumbnail, tags, views } = post
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-10 aspect-video bg-black/35" />
@@ -34,7 +34,11 @@ const BlogCard = ({ post }: { post: TBlog }) => {
           </div>
         </CardDescription>
       </CardHeader>
-      <CardFooter className="border-t flex justify-end z-20">
+      <CardFooter className="border-t flex justify-between z-20">
+        <div className="flex items-center gap-2 text-xs">
+          <Eye size={14} />
+          <span>{views}</span>
+        </div>
         <Link href={`/blogs/${post.id}`} className="flex gap-1 items-center text-sm font-semibold group-hover:underline">Read More<ArrowRight className="group-hover:ml-2 transition-all" size={14} /></Link>
       </CardFooter>
     </Card>
