@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
+import BlogCard from "@/components/modules/homepage/BlogCard";
 import { blogService } from "@/services/blog.service";
 import { userService } from "@/services/user.service";
+import { TBlog } from "@/types";
 
 export default async function Home() {
 
@@ -9,8 +10,12 @@ export default async function Home() {
   console.log({ session, blogs })
 
   return (
-    <Button>
-      Click me
-    </Button>
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto px-6">
+      {
+        blogs?.data?.data?.map((post: TBlog) => (
+          <BlogCard key={post.id} post={post} />
+        ))
+      }
+    </div>
   );
 }
