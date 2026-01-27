@@ -17,8 +17,10 @@ const BlogCard = ({ post }: { post: TBlog }) => {
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-10 aspect-video bg-black/35" />
       <Image
-        src={thumbnail || ''}
+        src={thumbnail || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ImIpHRSCUDgHtX12y60XeXK0TAjwBuL4bp6-czoyzDLUFDQZIHMCuvXf18JSkERgNUI&usqp=CAU'}
         alt="Event cover"
+        width={200}
+        height={100}
         className="relative z-10 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
       />
 

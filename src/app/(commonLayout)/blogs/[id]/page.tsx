@@ -1,35 +1,46 @@
 import { blogService } from "@/services/blog.service";
+import { TBlog } from "@/types";
 import Image from "next/image";
+
+export const generateStaticParams = async () => {
+  const { data: posts } = await blogService.getBlogs();
+
+  const list = posts?.data?.data ?? [];
+
+  return list.slice(0, 3).map((post: TBlog) => ({
+    id: post.id,
+  }));
+};
+
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
   const { data } = await blogService.getBlogById(id);
+
   const post = data?.result
-  console.log({ post })
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
 
         {/* Thumbnail */}
-        {post?.thumbnail && (
-          <div className="relative w-full h-56">
-            <Image
-              src={post.thumbnail}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+        <div className="relative w-full flex justify-center">
+          <Image
+            src={post?.thumbnail || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ImIpHRSCUDgHtX12y60XeXK0TAjwBuL4bp6-czoyzDLUFDQZIHMCuvXf18JSkERgNUI&usqp=CAU'}
+            alt={post.title}
+            width={200}
+            height={50}
+            className="object-cover"
+            priority
+          />
+        </div>
 
         {/* Content Wrapper */}
         <div className="p-8">
 
           {/* Featured Badge */}
-          {post.isFeatured && (
+          {post?.isFeatured && (
             <span className="inline-block mb-3 text-xs font-semibold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full">
               ⭐ Featured Post
             </span>
@@ -63,7 +74,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
 
           {/* Tags */}
-          {post?.tags?.length > 0 && (
+          {post?.tags && post?.tags?.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {post?.tags?.map((tag: string, index: number) => (
                 <span
