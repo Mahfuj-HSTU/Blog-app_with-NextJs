@@ -1,4 +1,19 @@
-const aboutPage = () => {
+"use client"
+import { getBlogs } from "@/actions/blog.action";
+import { useEffect, useState } from "react";
+
+const AboutPage = () => {
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    (async () => {
+      const blogs = await getBlogs()
+      setData(blogs)
+    })()
+  }, [])
+
+  console.log({ data })
+
   return (
     <div>
       <h1>
@@ -8,4 +23,4 @@ const aboutPage = () => {
   );
 };
 
-export default aboutPage;
+export default AboutPage;
