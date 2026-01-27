@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TBlog } from "@/types"
+import { Heart } from "lucide-react"
 import Image from "next/image"
 
 const BlogCard = ({ post }: { post: TBlog }) => {
@@ -20,6 +21,9 @@ const BlogCard = ({ post }: { post: TBlog }) => {
         alt="Event cover"
         className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
       />
+      <div className="absolute inset-2 -bottom-6 z-20 flex items-center text-sm">
+        {views}
+      </div>
       <CardHeader>
 
         <CardTitle>{title}</CardTitle>

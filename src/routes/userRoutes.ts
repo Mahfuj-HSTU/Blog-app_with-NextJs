@@ -1,3 +1,5 @@
+import { TRoute } from '@/types'
+
 export const userRoutes: TRoute[] = [
 	{
 		title: 'Blog Management',

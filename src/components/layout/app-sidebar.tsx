@@ -13,6 +13,7 @@ import {
 import Link from "next/link"
 import { adminRoutes } from "@/routes/adminRoutes"
 import { userRoutes } from "@/routes/userRoutes"
+import { TRoute, TUser } from "@/types"
 
 export function AppSidebar({ user, ...props }: { user: TUser & React.ComponentProps<typeof Sidebar> }) {
 
