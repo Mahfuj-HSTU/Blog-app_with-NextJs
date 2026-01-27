@@ -13,12 +13,15 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { ROLES } from "@/constant/roles"
+import { userService } from "@/services/user.service"
 
-export default function Page({ admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode }) {
+export default async function Page({ admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode }) {
 
-  const userInfo = {
-    role: 'user',
-  }
+  const { data } = await userService.getSession()
+  console.log({ data })
+
+  const userInfo = data?.user
 
   return (
     <SidebarProvider>
@@ -45,7 +48,7 @@ export default function Page({ admin, user }: { children: React.ReactNode, admin
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userInfo.role === 'admin' ? admin : user}
+          {userInfo?.role === ROLES.ADMIN ? admin : user}
         </div>
       </SidebarInset>
     </SidebarProvider>
