@@ -15,6 +15,13 @@ import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner"
 
 export function RegisterForm(props: React.ComponentProps<typeof Card>) {
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "http://localhost:3000",
+    });
+    console.log({ data })
+  }
 
   const form = useForm({
     defaultValues: {
@@ -50,7 +57,7 @@ export function RegisterForm(props: React.ComponentProps<typeof Card>) {
 
   return (
     <Card {...props}>
-      <CardHeader className="mt-6">
+      <CardHeader className="mt-2">
         <CardTitle>Create an account</CardTitle>
         <CardDescription>
           Enter your information below to create your account
@@ -146,9 +153,12 @@ export function RegisterForm(props: React.ComponentProps<typeof Card>) {
           </form.Field>
 
           {/* Submit */}
-          <div className="flex justify-end">
+          <div className="flex flex-col gap-4">
             <Button type="submit">
               Register
+            </Button>
+            <Button onClick={() => handleGoogleLogin()} variant="outline" type="button">
+              Login with Google
             </Button>
           </div>
 
