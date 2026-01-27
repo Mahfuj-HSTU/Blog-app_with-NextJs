@@ -5,15 +5,38 @@ import { env } from '@/env'
 // * Dynamic and {cache: 'no-store'} : SRR --> Static Side Rendering / Static page
 // * next: {revalidate: 60} : ISR --> Incremental Static Regeneration (Mix between static and dynamic)
 
-export const blogService = {
-	getBlogs: async function () {
-		try {
-			const res = await fetch(`${env.API_URL}/posts`, {
-				next: {
-					revalidate: 60
-				}
-			})
+interface ServiceOptions {
+	cache?: RequestCache
+	revalidate?: number
+}
 
+interface GetBlogParams {
+	isFeatured?: boolean
+	search?: string
+	category?: string
+	page?: number
+	limit?: number
+}
+
+export const blogService = {
+	getBlogs: async function (params?: GetBlogParams, options?: ServiceOptions) {
+		try {
+			const url = new URL(`${env.API_URL}/posts`)
+			// if (params?.isFeatured)
+			// 	url.searchParams.set('isFeatured', params.isFeatured.toString())
+			// if (params?.search) url.searchParams.set('search', params.search)
+			// if (params?.category) url.searchParams.set('category', params.category)
+			// if (params?.page) url.searchParams.set('page', params.page.toString())
+			// if (params?.limit) url.searchParams.set('limit', params.limit.toString())
+			if (params) {
+				Object.entries(params).forEach(([key, value]) => {
+					if (value) url.searchParams.set(key, value.toString())
+				})
+			}
+			const config: RequestInit = {}
+			if (options?.cache) config.cache = options.cache
+			if (options?.revalidate) config.next = { revalidate: options.revalidate }
+			const res = await fetch(url.toString(), config)
 			const blogs = await res.json()
 
 			return {

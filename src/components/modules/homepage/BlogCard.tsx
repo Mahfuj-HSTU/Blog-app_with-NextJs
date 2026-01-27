@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
@@ -8,11 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TBlog } from "@/types"
-import { Heart } from "lucide-react"
 import Image from "next/image"
 
 const BlogCard = ({ post }: { post: TBlog }) => {
-  const { title, content, thumbnail, tags, views, _count } = post
+  const { title, content, thumbnail, tags, views } = post
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />

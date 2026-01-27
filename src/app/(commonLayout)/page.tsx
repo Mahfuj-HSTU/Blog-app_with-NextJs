@@ -6,8 +6,10 @@ import { TBlog } from "@/types";
 export default async function Home() {
 
   const session = await userService.getSession()
-  const blogs = await blogService.getBlogs()
-  console.log({ session, blogs })
+  const blogs = await blogService.getBlogs({
+    isFeatured: false,
+    search: 'ai'
+  })
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto px-6">
