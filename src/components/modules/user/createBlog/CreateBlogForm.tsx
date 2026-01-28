@@ -41,10 +41,11 @@ export function CreateBlogForm() {
       }
 
       const res = await createBlogAction(payload)
+      console.log({ res })
       if (res.error) {
         toast.error("Failed to create blog")
       }
-      if (res.data) {
+      if (res.data.success) {
         toast.success("Blog created successfully")
         form.reset()
       }

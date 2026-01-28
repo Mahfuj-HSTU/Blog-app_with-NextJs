@@ -19,8 +19,6 @@ import { userService } from "@/services/user.service"
 export default async function Page({ admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode }) {
 
   const { data } = await userService.getSession()
-  console.log({ data })
-
   const userInfo = data?.user
 
   return (
