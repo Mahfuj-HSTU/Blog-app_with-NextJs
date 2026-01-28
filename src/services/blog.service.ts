@@ -1,4 +1,5 @@
 import { env } from '@/env'
+import { TBlog } from '@/types'
 import { cookies } from 'next/headers'
 
 // * No Dynamic and No {cache: 'no-store'} : SSG --> Static Site Generation
@@ -71,7 +72,7 @@ export const blogService = {
 		}
 	},
 
-	createBlog: async function (payload: any) {
+	createBlog: async function (payload: TBlog) {
 		const cookiesStore = await cookies()
 		try {
 			const res = await fetch(`${env.API_URL}/posts`, {

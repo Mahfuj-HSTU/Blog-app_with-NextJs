@@ -1,11 +1,11 @@
 export interface TBlog {
-	id: string
+	id?: string
 	title: string
 	content: string
 	thumbnail?: string
 	tags?: string[]
 	views?: number
-	_count: {
+	_count?: {
 		comments: number
 	}
 	isFeatured?: boolean

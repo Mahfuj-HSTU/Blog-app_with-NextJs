@@ -1,5 +1,6 @@
 'use server'
 import { blogService } from '@/services/blog.service'
+import { TBlog } from '@/types'
 import { revalidateTag } from 'next/cache'
 
 export const getBlogs = async () => {
@@ -12,7 +13,7 @@ export const getBlogById = async (id: string) => {
 	return data
 }
 
-export async function createBlogAction(payload: any) {
+export async function createBlogAction(payload: TBlog) {
 	const result = await blogService.createBlog(payload)
 
 	revalidateTag('blogs', 'max')
