@@ -14,6 +14,8 @@ import { useForm } from "@tanstack/react-form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
+import { createBlogAction } from "@/actions/blog.action"
+import { toast } from "sonner"
 
 export function CreateBlogForm() {
 
@@ -38,9 +40,14 @@ export function CreateBlogForm() {
           .filter(Boolean),
       }
 
-      console.log("Submitting blog:", payload)
-
-      // await blogService.createBlog(payload)
+      const res = await createBlogAction(payload)
+      if (res.error) {
+        toast.error("Failed to create blog")
+      }
+      if (res.data) {
+        toast.success("Blog created successfully")
+        form.reset()
+      }
     },
   })
 
@@ -167,6 +174,7 @@ export function CreateBlogForm() {
             <Button
               type="submit"
               disabled={form.state.isSubmitting}
+              className="cursor-pointer"
             >
               {form.state.isSubmitting ? "Publishing..." : "Create Post"}
             </Button>

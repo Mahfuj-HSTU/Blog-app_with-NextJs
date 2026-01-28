@@ -10,3 +10,7 @@ export const getBlogById = async (id: string) => {
 	const { data } = await blogService.getBlogById(id)
 	return data
 }
+
+export async function createBlogAction(payload: any) {
+	return await blogService.createBlog(payload)
+}

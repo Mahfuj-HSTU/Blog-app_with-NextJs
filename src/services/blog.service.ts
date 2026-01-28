@@ -67,5 +67,29 @@ export const blogService = {
 				error: error
 			}
 		}
+	},
+
+	createBlog: async function (payload: any) {
+		try {
+			const res = await fetch(`${env.API_URL}/posts`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			})
+			const blog = await res.json()
+
+			return {
+				data: blog,
+				error: null
+			}
+		} catch (error) {
+			return {
+				data: null,
+				message: 'Something went wrong',
+				error: error
+			}
+		}
 	}
 }
