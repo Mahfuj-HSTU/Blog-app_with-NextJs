@@ -1,4 +1,5 @@
 import { env } from '@/env'
+import { cookies } from 'next/headers'
 
 // * No Dynamic and No {cache: 'no-store'} : SSG --> Static Site Generation
 // * Dynamic and No {cache: 'no-store'} : SSR --> Server Side Rendering / Dynamic page
@@ -36,6 +37,7 @@ export const blogService = {
 			const config: RequestInit = {}
 			if (options?.cache) config.cache = options.cache
 			if (options?.revalidate) config.next = { revalidate: options.revalidate }
+			config.next = { ...config.next, tags: ['blogs'] }
 			const res = await fetch(url.toString(), config)
 			const blogs = await res.json()
 
@@ -70,11 +72,13 @@ export const blogService = {
 	},
 
 	createBlog: async function (payload: any) {
+		const cookiesStore = await cookies()
 		try {
 			const res = await fetch(`${env.API_URL}/posts`, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					Cookie: cookiesStore.toString()
 				},
 				body: JSON.stringify(payload)
 			})
